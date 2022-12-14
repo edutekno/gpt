@@ -1,17 +1,21 @@
+import openai
 import streamlit as st
 
-# Take input from the user
-num1 = st.number_input("Enter first number: ")
-num2 = st.number_input("Enter second number: ")
+# Set the API key
+openai.api_key = "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"
 
-# Perform the calculations
-sum = num1 + num2
-diff = num1 - num2
-prod = num1 * num2
-quot = num1 / num2
+# Take input from the user
+prompt = st.text_area("Enter a prompt: ")
+
+# Use GPT-3 to generate text
+response = openai.Completion.create(
+    engine="text-davinci-002",
+    prompt=prompt,
+    max_tokens=1024
+)
+
+# Output the generated text
+st.write(response["choices"][0]["text"])
 
 # Output the results
-st.write("Sum: ", sum)
-st.write("Difference: ", diff)
-st.write("Product: ", prod)
-st.write("Quotient: ", quot)
+#st.write("Sum: ", sum)
